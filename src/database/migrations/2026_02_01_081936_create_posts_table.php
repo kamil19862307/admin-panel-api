@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('body');
-            $table->string('image');
+            $table->string('image')->default('no_image.png');
 
             $table->timestamps();
         });
