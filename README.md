@@ -9,4 +9,92 @@
 
 ## Admin panel REST API
 
+Backend приложение для фронта админ панели, которое содержит Посты, Категории и пользователей.
 
+
+### Установка
+
+- Склонировать репозиторий из гитхаба
+
+
+- Перейти в репозирорий с проектом
+
+
+- Команды для докера настроены для работы из корневой директории, в директорию src (там находится laravel)
+  переключаться не надо, разве что когда файл окружения создавать будете .env
+
+
+- Поднять контейнеры докера (в репозитории уже есть docker-compose.yml с nginx, MySQL и composer)
+```bash
+
+docker compose up -d
+```
+
+- Установить PHP-зависимости (Composer)
+```bash
+
+docker compose exec app composer install
+```
+
+- Скопировать (создать) файл окружения в директории src
+```bash
+
+cd src
+```
+```bash
+
+cp .env.example .env
+```
+
+- Вернуться в корневой каталог
+```bash
+
+cd ..
+```
+
+- Сгенерировать ключ laravel
+```bash
+
+docker compose exec app php artisan key:generate
+```
+
+- Выполнить миграцию и заполнить базу данных тестовыми данными
+```bash
+
+docker compose exec app php migrate --seed
+```
+
+- Если всё прошло успешно, то проект будет доступен по адресу (порт 8080) http://localhost:8080. Пример получения всех постов: http://localhost:8080/api/posts
+
+### Какие могут возникнуть проблемы при устаовке:
+
+- Если комп достаточно старый, то может не "подняться" контейнер с базой данных, проверить можно командой:
+```bash
+
+docker ps
+```
+
+В таком случае можно понизить версию дазы данных на более старую. В корневой директории находим
+docker-compose.yml и меняем строку **image: mysql:8.0** на **image: mysql:5.7**
+
+### Как обращаться к сервисам в докере
+
+Обращаться к сервисам из корневой директории (у меня это To-Do List) через:
+
+docker compose exec app
+
+Например установить зависимости:
+
+docker compose exec app composer install
+
+Или сгенерировать ключ ларавель:
+
+docker compose exec app php artisan key:generate
+
+Или хотим создать контроллер:
+
+docker compose exec app php artisan make:controller CustomerController
+
+Или поработать с композером:
+
+docker compose exec app composer require laravel/sanctum
