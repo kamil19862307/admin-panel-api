@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return CategoryResource::collection(Category::all());
+        return CategoryResource::collection(
+            Category::all('name', 'slug'));
     }
 
     /**
@@ -31,6 +32,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category): CategoryResource
     {
+        $category->load('posts');
+
         return new CategoryResource($category);
     }
 

@@ -17,6 +17,7 @@ class CategoryResource extends JsonResource
         return [
             'name' => $this->name,
             'slug' => $this->slug,
+            'posts' => PostResource::collection($this->whenLoaded('posts')),
         ];
     }
 }
