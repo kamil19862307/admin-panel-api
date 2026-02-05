@@ -61,7 +61,7 @@ docker compose exec app php artisan key:generate
 - Выполнить миграцию и заполнить базу данных тестовыми данными
 ```bash
 
-docker compose exec app php migrate --seed
+docker compose exec app php artisan migrate --seed
 ```
 
 - Если всё прошло успешно, то проект будет доступен по адресу (порт 8080) http://localhost:8080. Пример получения всех постов: http://localhost:8080/api/posts
