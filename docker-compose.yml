@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    container_name: laravel_app
     working_dir: /var/www
     volumes:
       - ./src:/var/www
@@ -12,7 +11,6 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: laravel_nginx
     ports:
       - "8080:80"
     volumes:
@@ -23,7 +21,6 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: laravel_db
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_ROOT_PASSWORD: root

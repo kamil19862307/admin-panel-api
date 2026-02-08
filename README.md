@@ -66,6 +66,25 @@ docker compose exec app php artisan migrate --seed
 
 - Если всё прошло успешно, то проект будет доступен по адресу (порт 8080) http://localhost:8080. Пример получения всех постов: http://localhost:8080/api/posts
 
+### Конечные точки API / Доступные маршруты
+
+Проект предоставляет **RESTful API** для управления постами. Ниже приведена таблица с основными доступными маршрутами и их назначением.
+
+| **Verb** | **URI** | **Action** | **Route Name** |
+| :--- | :--- | :--- | :--- |
+| GET | /posts | index | posts.index |
+| GET | /posts/create | create | posts.create |
+| POST | /posts | store | posts.store |
+| GET | /posts/{post} | show | posts.show |
+| GET | /posts/{post}/edit | edit | posts.edit |
+| PUT/PATCH | /posts/{post} | update | posts.update |
+| DELETE | /posts/{post} | destroy | posts.destroy |
+
+- **{post}** в URI обозначает идентификатор конкретного поста.
+- Например, хотим изменить пост с id 3, выбираем метод PUT/PATCH и адрес будет такой: http://localhost:8080/api/posts/3
+
+
+
 ### Какие могут возникнуть проблемы при устаовке:
 
 - Если комп достаточно старый, то может не "подняться" контейнер с базой данных, проверить можно командой:
